@@ -1,15 +1,12 @@
-import bpy
 from .. base import MockupNode
 
-class FloatMathNode(MockupNode, bpy.types.Node):
-    bl_idname = "mn_FloatMathNode"
-    bl_label = "Float Math"
-
-    input_sockets = [
-        ("mn_FloatSocket", "A"),
-        ("mn_FloatSocket", "B"),
+FloatMathNode = MockupNode.create_simple(
+    "mn_FloatMathNode", "Float Math",
+    inputs = [
+        ("Float", "A"),
+        ("Float", "B")
+    ],
+    outputs = [
+        ("Float", "Result")
     ]
-
-    output_sockets = [
-        ("mn_FloatSocket", "Result"),
-    ]
+)

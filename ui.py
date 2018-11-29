@@ -1,4 +1,5 @@
 import bpy
+from . base import MockupNode
 
 class MockupsPanel(bpy.types.Panel):
     bl_idname = "mn.mockups"
@@ -8,6 +9,7 @@ class MockupsPanel(bpy.types.Panel):
 
     def draw(self, context):
         layout = self.layout
-        props = layout.operator("node.add_node", text="Float Math")
-        props.type = "mn_FloatMathNode"
-        props.use_transform = True
+        for cls in MockupNode.__subclasses__():
+            props = layout.operator("node.add_node", text=cls.bl_label)
+            props.type = cls.bl_idname
+            props.use_transform = True
